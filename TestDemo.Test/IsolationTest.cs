@@ -108,7 +108,7 @@ namespace TestDemo.Test
         [Test]
         public void 呼叫_參數為IEnumerable()
         {
-            var ids = new[] { 5 };
+            IEnumerable<int> ids = new[] { 5 };
 
             IDao dao = Substitute.For<IDao>();
             dao.QueryCondition(ids)
@@ -117,15 +117,16 @@ namespace TestDemo.Test
                             new DTO { Id = 5, Name = "E"}
                         });
 
-            ILogDao logDao           = Substitute.For<ILogDao>();
-            int[]   actualCollection = null;
+            ILogDao logDao = Substitute.For<ILogDao>();
+
+            IEnumerable<int> actualCollection = null;
             logDao.DebugCollection(Arg.Do<int[]>(x => actualCollection = x));
 
-            var target = new BL(dao, logDao);
+            var target     = new BL(dao , logDao);
             var conditions = new List<VO> {new VO {Id = 5}};
             target.Query(conditions);
 
-            int[] expectedCollection = new []{ 5 };
+            IEnumerable<int> expectedCollection = new[] {5};
             expectedCollection.ToExpectedObject().ShouldNotEqual(actualCollection);
         }
     }
