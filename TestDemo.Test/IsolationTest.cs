@@ -63,19 +63,29 @@ namespace TestDemo.Test
             //logDao.ReceivedWithAnyArgs(2).Debug(string.Empty);
             
             //logDao.ReceivedWithAnyArgs(1).Debug(string.Empty);
-            logDao.Received(1).Debug("No Condition Query");
+            logDao.Received(1).Debug("No Condition QueryCondition");
         }
 
         [Test]
-        public void 呼叫_ILogDao_DebugObj_次數1_參數為參考型別()
+        public void 呼叫_ILogDao_DebugObj_DebugCollection_次數1_參數為參考型別()
         {
+            var condition = new QueryCondition
+                            {
+                                Keyword = "3"
+                            };
+
             IDao dao = Substitute.For<IDao>();
+            dao.QueryCondition(condition)
+                   .Returns(new List<DTO>
+                  {
+                      new DTO { Id = 3, Name = "C"}
+                  });
 
             ILogDao logDao = Substitute.For<ILogDao>();
+            int[] actualCollection = null;
+            logDao.DebugCollection(Arg.Do<int[]>(x => actualCollection = x));
 
             var target = new BL(dao, logDao);
-            
-            var condition = new QueryCondition();
             target.Query(condition);
 
             
@@ -84,7 +94,15 @@ namespace TestDemo.Test
 
             //logDao.ReceivedWithAnyArgs(2).DebugObject((QueryCondition)null);
             
-            logDao.Received(1).DebugObject(condition);
+            // reference equal
+            //logDao.Received(1).DebugObject(condition);
+
+            // fail
+            //var expectedCondition = new QueryCondition { Keyword = "3" };
+            //logDao.Received(1).DebugObject(expectedCondition);
+
+            int[] expectedCollection = new []{ 3 };
+            expectedCollection.ToExpectedObject().ShouldEqual(actualCollection);
         }
     }
 }
