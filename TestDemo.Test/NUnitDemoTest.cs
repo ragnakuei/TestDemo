@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace TestDemo.Test
 {
     [TestFixture]
-    public class CalculatorTest
+    public class NUnitDemoTest
     {
         [Test]
         public void 驗證Method回傳結果()
@@ -22,6 +22,15 @@ namespace TestDemo.Test
             var target = new Calculator();
 
             var ex = Assert.Throws<DivideByZeroException>(() => target.Divided(1 , 0));
+        }
+
+        [Test]
+        public void 驗證ExceptionProperty()
+        {
+            var target = new ExceptionThrower();
+
+            var ex = Assert.Throws<CustomException>(() => target.ThrowException("test"));
+            Assert.AreEqual("Detail:test", ex.Detail);
         }
     }
 }
