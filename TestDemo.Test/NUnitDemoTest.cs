@@ -6,6 +6,8 @@ namespace TestDemo.Test
     [TestFixture]
     public class NUnitDemoTest
     {
+        // NUnit Attribute reference： https://github.com/nunit/docs/wiki/Attributes
+
         [Test]
         public void 驗證Method回傳結果()
         {
@@ -32,9 +34,9 @@ namespace TestDemo.Test
             var ex = Assert.Throws<CustomException>(() => target.ThrowException("test"));
             Assert.AreEqual("Detail:test", ex.Detail);
         }
-
+        
         [Test]
-        [TestCase(1)]
+        [TestCase(1)] // TestCase reference： https://github.com/nunit/docs/wiki/TestCase-Attribute
         public void TestCase使用方式1_true(int i)
         {
             Assert.AreEqual(1, i);
@@ -49,5 +51,7 @@ namespace TestDemo.Test
         {
             Assert.AreEqual(false, i == 1);
         }
+
+
     }
 }
