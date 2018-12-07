@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollectionCompareTest.cs" />
+    <Compile Include="IsolationTest.cs" />
     <Compile Include="NUnitDemoTest.cs" />
     <Compile Include="NUnitHookDemoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

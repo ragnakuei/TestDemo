@@ -41,10 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Isolation\BL.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="CustomClass.cs" />
     <Compile Include="CustomException.cs" />
     <Compile Include="ExceptionThrower.cs" />
+    <Compile Include="Isolation\DTO.cs" />
+    <Compile Include="Isolation\Helpers.cs" />
+    <Compile Include="Isolation\IDao.cs" />
+    <Compile Include="Isolation\ILogDao.cs" />
+    <Compile Include="Isolation\VO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
