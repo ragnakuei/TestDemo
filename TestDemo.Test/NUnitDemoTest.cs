@@ -19,11 +19,19 @@ namespace TestDemo.Test
         }
 
         [Test]
-        public void 驗證Exception()
+        public void 驗證Exception1()
         {
             var target = new Calculator();
 
             var ex = Assert.Throws<DivideByZeroException>(() => target.Divided(1 , 0));
+        }
+
+        [Test]
+        public void 驗證Exception2()
+        {
+            var target = new Calculator();
+
+            Assert.Catch<DivideByZeroException>(() => target.Divided(1 , 0));
         }
 
         [Test]
@@ -51,7 +59,5 @@ namespace TestDemo.Test
         {
             Assert.AreEqual(false, i == 1);
         }
-
-
     }
 }
