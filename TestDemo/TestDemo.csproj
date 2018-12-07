@@ -50,6 +50,7 @@
     <Compile Include="Isolation\Helpers.cs" />
     <Compile Include="Isolation\IDao.cs" />
     <Compile Include="Isolation\ILogDao.cs" />
+    <Compile Include="Isolation\QueryCondition.cs" />
     <Compile Include="Isolation\VO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

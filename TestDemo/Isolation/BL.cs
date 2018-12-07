@@ -18,7 +18,17 @@ namespace TestDemo.Isolation
             var dtos = _dao?.Query();
             var vos  = dtos?.Select(d => d.ToVO()).ToArray() ?? new VO[0];
 
-            _logDao?.Debug("BL Query");
+            _logDao?.Debug("No Condition Query");
+
+            return vos;
+        }
+
+        public VO[] Query(QueryCondition condition)
+        {
+            var dtos = _dao?.Query(condition);
+            var vos  = dtos?.Select(d => d.ToVO()).ToArray() ?? new VO[0];
+
+            _logDao?.DebugObject(condition);
 
             return vos;
         }

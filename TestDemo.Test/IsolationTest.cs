@@ -4,7 +4,6 @@ using ExpectedObjects;
 using NSubstitute;
 using NUnit.Framework;
 using TestDemo.Isolation;
-using Assert = NUnit.Framework.Assert;
 
 namespace TestDemo.Test
 {
@@ -62,7 +61,30 @@ namespace TestDemo.Test
             target.Query();
 
             //logDao.ReceivedWithAnyArgs(2).Debug(string.Empty);
-            logDao.Received(1).Debug("BL Query");
+            
+            //logDao.ReceivedWithAnyArgs(1).Debug(string.Empty);
+            logDao.Received(1).Debug("No Condition Query");
+        }
+
+        [Test]
+        public void 呼叫_ILogDao_DebugObj_次數1_參數為參考型別()
+        {
+            IDao dao = Substitute.For<IDao>();
+
+            ILogDao logDao = Substitute.For<ILogDao>();
+
+            var target = new BL(dao, logDao);
+            
+            var condition = new QueryCondition();
+            target.Query(condition);
+
+            
+            //logDao.ReceivedWithAnyArgs(1).DebugObject((List<int>)null);
+            //logDao.ReceivedWithAnyArgs(1).DebugObject((QueryCondition)null);
+
+            //logDao.ReceivedWithAnyArgs(2).DebugObject((QueryCondition)null);
+            
+            logDao.Received(1).DebugObject(condition);
         }
     }
 }
