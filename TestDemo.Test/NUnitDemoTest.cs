@@ -18,7 +18,7 @@ namespace TestDemo.Test
             Assert.AreEqual(expected, actual);
         }
 
-        [Test]
+        [Test] // Throw referenece： https://github.com/nunit/docs/wiki/Assert.Throws
         public void 驗證Exception1()
         {
             var target = new Calculator();
@@ -26,7 +26,7 @@ namespace TestDemo.Test
             var ex = Assert.Throws<DivideByZeroException>(() => target.Divided(1 , 0));
         }
 
-        [Test]
+        [Test]  // Catch reference： https://github.com/nunit/docs/wiki/Assert.Catch
         public void 驗證Exception2()
         {
             var target = new Calculator();
@@ -34,7 +34,7 @@ namespace TestDemo.Test
             Assert.Catch<DivideByZeroException>(() => target.Divided(1 , 0));
         }
 
-        [Test]
+        [Test] 
         public void 驗證ExceptionProperty()
         {
             var target = new ExceptionThrower();
