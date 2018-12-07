@@ -35,5 +35,17 @@ namespace TestDemo.Isolation
 
             return vos;
         }
+
+        public VO[] Query(List<VO> conditions)
+        {
+            _logDao?.DebugObject(conditions);
+
+            var dtos = _dao?.QueryCondition(conditions.Select(c=>c.Id));
+            var vos  = dtos?.Select(d => d.ToVO()).ToArray() ?? new VO[0];
+
+            _logDao?.DebugCollection(vos.Select(vo=>vo.Id).ToArray());
+
+            return vos;
+        }
     }
 }

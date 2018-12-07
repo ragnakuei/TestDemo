@@ -104,5 +104,29 @@ namespace TestDemo.Test
             int[] expectedCollection = new []{ 3 };
             expectedCollection.ToExpectedObject().ShouldEqual(actualCollection);
         }
+
+        [Test]
+        public void 呼叫_參數為IEnumerable()
+        {
+            var ids = new[] { 5 };
+
+            IDao dao = Substitute.For<IDao>();
+            dao.QueryCondition(ids)
+               .Returns(new List<DTO>
+                        {
+                            new DTO { Id = 5, Name = "E"}
+                        });
+
+            ILogDao logDao           = Substitute.For<ILogDao>();
+            int[]   actualCollection = null;
+            logDao.DebugCollection(Arg.Do<int[]>(x => actualCollection = x));
+
+            var target = new BL(dao, logDao);
+            var conditions = new List<VO> {new VO {Id = 5}};
+            target.Query(conditions);
+
+            int[] expectedCollection = new []{ 5 };
+            expectedCollection.ToExpectedObject().ShouldNotEqual(actualCollection);
+        }
     }
 }
