@@ -131,15 +131,21 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AutofacConfig.cs" />
+    <Compile Include="BL\IKeyedBL.cs" />
     <Compile Include="BL\IOrgRecordBL.cs" />
     <Compile Include="BL\ISingletonBL.cs" />
+    <Compile Include="BL\Keyed2BL.cs" />
+    <Compile Include="BL\Keyed1BL.cs" />
+    <Compile Include="BL\KeyedTypeProvider.cs" />
     <Compile Include="BL\OrgRecordBL.cs" />
     <Compile Include="BL\SingletonBL.cs" />
+    <Compile Include="Controllers\KeyedController.cs" />
     <Compile Include="Controllers\OrgRecordController.cs" />
     <Compile Include="Controllers\SingletonController.cs" />
     <Compile Include="DAL\IOrgRecordDAO.cs" />
     <Compile Include="DAL\OrgRecordImpl.cs" />
     <Compile Include="DTO\OrgRecordDTO.cs" />
+    <Compile Include="Enum\KeyedType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
