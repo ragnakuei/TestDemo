@@ -14,7 +14,10 @@ namespace WebWithDI
             var builder = new ContainerBuilder();
 
             builder.RegisterType<OrgRecordController>().InstancePerRequest();
-        
+            builder.RegisterType<SingletonController>().InstancePerRequest();
+            
+            builder.RegisterType<SingletonBL>().As<ISingletonBL>().SingleInstance();
+            
             builder.RegisterType<OrgRecordBL>().As<IOrgRecordBL>();
             builder.RegisterType<OrgRecordImpl>().As<IOrgRecordDAO>();
 
