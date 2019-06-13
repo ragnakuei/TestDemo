@@ -1,4 +1,4 @@
-namespace WebWithDI.Enum
+namespace WebWithDI.Enums
 {
     public enum KeyedType
     {

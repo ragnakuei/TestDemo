@@ -1,5 +1,5 @@
 using System.Web;
-using WebWithDI.Enum;
+using WebWithDI.Enums;
 
 namespace WebWithDI.BL
 {

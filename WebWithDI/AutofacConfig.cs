@@ -5,7 +5,7 @@ using Autofac.Integration.WebApi;
 using WebWithDI.Controllers;
 using WebWithDI.BL;
 using WebWithDI.DAL;
-using WebWithDI.Enum;
+using WebWithDI.Enums;
 
 namespace WebWithDI
 {
@@ -18,10 +18,24 @@ namespace WebWithDI
             builder.Register(c => HttpContext.Current.Request).As<HttpRequest>().InstancePerRequest();
             builder.RegisterType<OrgRecordController>().InstancePerRequest();
             builder.RegisterType<SingletonController>().InstancePerRequest();
+            builder.RegisterType<NamedController>().InstancePerRequest();
             builder.RegisterType<KeyedController>().InstancePerRequest();
 
             builder.RegisterType<SingletonBL>().As<ISingletonBL>().SingleInstance();
 
+            // NamedTypeProvider.GetNamedType() 透過 header key 來回傳 NamedType
+            builder.RegisterType<NamedTypeProvider>().As<NamedTypeProvider>();
+            builder.RegisterType<NamedABL>().Named<INamedBL>(NamedType.A.ToString());
+            builder.RegisterType<NamedBBL>().Named<INamedBL>(NamedType.B.ToString());
+            builder.RegisterType<NamedNoneBL>().Named<INamedBL>(NamedType.None.ToString());
+            builder.Register(c =>
+                             {
+                                 var namedProvider = c.Resolve<NamedTypeProvider>();
+                                 var namedType = namedProvider.GetNamedType();
+                                 return c.ResolveNamed<INamedBL>(namedType.ToString());
+                             })
+                   .As<INamedBL>();
+            
             // KeyedTypeProvider.GetKeyedType() 透過是否給定 header key 來回傳 KeyedType
             builder.RegisterType<KeyedTypeProvider>().As<KeyedTypeProvider>();
             builder.RegisterType<Keyed1BL>().Keyed<IKeyedBL>(KeyedType.Keyed1);
