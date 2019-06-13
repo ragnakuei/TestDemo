@@ -131,6 +131,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AutofacConfig.cs" />
+    <Compile Include="BL\IBaseTypeBL.cs" />
     <Compile Include="BL\IKeyedBL.cs" />
     <Compile Include="BL\INamedBL.cs" />
     <Compile Include="BL\IOrgRecordBL.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="BL\NamedTypeProvider.cs" />
     <Compile Include="BL\OrgRecordBL.cs" />
     <Compile Include="BL\SingletonBL.cs" />
+    <Compile Include="Controllers\BaseTypeController.cs" />
     <Compile Include="Controllers\KeyedController.cs" />
     <Compile Include="Controllers\NamedController.cs" />
     <Compile Include="Controllers\OrgRecordController.cs" />

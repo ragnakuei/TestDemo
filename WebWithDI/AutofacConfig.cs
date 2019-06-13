@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System;
+using System.Reflection;
+using System.Web;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
@@ -16,10 +18,28 @@ namespace WebWithDI
             var builder = new ContainerBuilder();
 
             builder.Register(c => HttpContext.Current.Request).As<HttpRequest>().InstancePerRequest();
-            builder.RegisterType<OrgRecordController>().InstancePerRequest();
-            builder.RegisterType<SingletonController>().InstancePerRequest();
-            builder.RegisterType<NamedController>().InstancePerRequest();
-            builder.RegisterType<KeyedController>().InstancePerRequest();
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            // 註冊 Assembly 內所有的 ApiController
+            // builder.RegisterApiControllers(assembly).InstancePerRequest();
+
+            // 註冊指定 Controller
+            // builder.RegisterType<OrgRecordController>().InstancePerRequest();
+            // builder.RegisterType<SingletonController>().InstancePerRequest();
+            // builder.RegisterType<NamedController>().InstancePerRequest();
+            // builder.RegisterType<KeyedController>().InstancePerRequest();
+
+            // 註冊 Type 結尾是 Controller 的所有 class
+            builder.RegisterAssemblyTypes(assembly)
+                   .Where(x => x.Name.EndsWith("Controller", StringComparison.Ordinal));
+
+            // 註冊所有父類別為 IBaseTypeBL 的物件
+            builder.RegisterAssemblyTypes(assembly)
+                   .Where(x => x.Name.StartsWith("BaseType", StringComparison.Ordinal));
+
+            builder.RegisterType<OrgRecordBL>().As<IOrgRecordBL>();
+            builder.RegisterType<OrgRecordImpl>().As<IOrgRecordDAO>();
 
             builder.RegisterType<SingletonBL>().As<ISingletonBL>().SingleInstance();
 
@@ -35,7 +55,7 @@ namespace WebWithDI
                                  return c.ResolveNamed<INamedBL>(namedType.ToString());
                              })
                    .As<INamedBL>();
-            
+
             // KeyedTypeProvider.GetKeyedType() 透過是否給定 header key 來回傳 KeyedType
             builder.RegisterType<KeyedTypeProvider>().As<KeyedTypeProvider>();
             builder.RegisterType<Keyed1BL>().Keyed<IKeyedBL>(KeyedType.Keyed1);
@@ -47,9 +67,6 @@ namespace WebWithDI
                                  return c.ResolveKeyed<IKeyedBL>(keyedType);
                              })
                    .As<IKeyedBL>();
-
-            builder.RegisterType<OrgRecordBL>().As<IOrgRecordBL>();
-            builder.RegisterType<OrgRecordImpl>().As<IOrgRecordDAO>();
 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
