@@ -6,7 +6,7 @@ using WebWithDI.VO;
 
 namespace WebWithDI.BL
 {
-    internal class OrgRecordBL
+    internal class OrgRecordBL : IOrgRecordBL
     {
         private readonly IOrgRecordDAO _orgRecordDao;
 
