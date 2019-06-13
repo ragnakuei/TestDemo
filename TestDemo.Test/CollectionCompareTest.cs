@@ -87,8 +87,6 @@ namespace TestDemo.Test
             //                 , new CustomClass { Id = 3 }
             //               };
 
-
-
             //var expected = new []
             //               {
             //                   new CustomClass { Id = 2 }
