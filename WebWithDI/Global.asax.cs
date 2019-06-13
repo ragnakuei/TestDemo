@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace WebNoDI
+namespace WebWithDI
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
