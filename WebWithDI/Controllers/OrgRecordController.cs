@@ -5,11 +5,11 @@ namespace WebWithDI.Controllers
 {
     public class OrgRecordController : ApiController
     {
-        private readonly OrgRecordBL _orgRecordBl;
+        private readonly IOrgRecordBL _orgRecordBl;
 
-        public OrgRecordController()
+        public OrgRecordController(IOrgRecordBL orgRecordBl)
         {
-            _orgRecordBl = new OrgRecordBL();
+            _orgRecordBl = orgRecordBl;
         }
 
         [HttpGet]

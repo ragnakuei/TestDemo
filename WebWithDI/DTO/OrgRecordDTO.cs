@@ -1,6 +1,6 @@
 namespace WebWithDI.DTO
 {
-    internal class OrgRecordDTO
+    public class OrgRecordDTO
     {
         public int Id { get; set; }
     }

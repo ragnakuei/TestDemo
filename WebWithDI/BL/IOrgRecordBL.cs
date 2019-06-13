@@ -3,7 +3,7 @@ using WebWithDI.VO;
 
 namespace WebWithDI.BL
 {
-    internal interface IOrgRecordBL
+    public interface IOrgRecordBL
     {
         List<OrgRecordVO> GetAll();
     }

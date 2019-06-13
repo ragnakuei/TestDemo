@@ -1,6 +1,6 @@
 namespace WebWithDI.VO
 {
-    internal class OrgRecordVO
+    public class OrgRecordVO
     {
         public int Id { get; set; }
     }

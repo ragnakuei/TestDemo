@@ -3,7 +3,7 @@ using WebWithDI.DTO;
 
 namespace WebWithDI.DAL
 {
-    internal interface IOrgRecordDAO
+    public interface IOrgRecordDAO
     {
         IEnumerable<OrgRecordDTO> GetAll();
     }

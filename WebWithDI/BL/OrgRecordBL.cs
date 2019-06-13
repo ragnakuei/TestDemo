@@ -6,13 +6,13 @@ using WebWithDI.VO;
 
 namespace WebWithDI.BL
 {
-    internal class OrgRecordBL : IOrgRecordBL
+    public class OrgRecordBL : IOrgRecordBL
     {
         private readonly IOrgRecordDAO _orgRecordDao;
 
-        public OrgRecordBL()
+        public OrgRecordBL(IOrgRecordDAO orgRecordDao)
         {
-            _orgRecordDao = new OrgRecordImpl();
+            _orgRecordDao = orgRecordDao;
         }
 
         public List<OrgRecordVO> GetAll()
