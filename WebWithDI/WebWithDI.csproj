@@ -135,6 +135,8 @@
     <Compile Include="BL\IKeyedBL.cs" />
     <Compile Include="BL\INamedBL.cs" />
     <Compile Include="BL\IOrgRecordBL.cs" />
+    <Compile Include="BL\IPaRecordBL.cs" />
+    <Compile Include="BL\IPaRecordValidateBL.cs" />
     <Compile Include="BL\ISingletonBL.cs" />
     <Compile Include="BL\Keyed2BL.cs" />
     <Compile Include="BL\Keyed1BL.cs" />
@@ -144,15 +146,22 @@
     <Compile Include="BL\NamedNoneBL.cs" />
     <Compile Include="BL\NamedTypeProvider.cs" />
     <Compile Include="BL\OrgRecordBL.cs" />
+    <Compile Include="BL\PaRecordBL.cs" />
+    <Compile Include="BL\PaRecordValidateBL.cs" />
     <Compile Include="BL\SingletonBL.cs" />
     <Compile Include="Controllers\BaseTypeController.cs" />
     <Compile Include="Controllers\KeyedController.cs" />
     <Compile Include="Controllers\NamedController.cs" />
     <Compile Include="Controllers\OrgRecordController.cs" />
+    <Compile Include="Controllers\PaRecordController.cs" />
     <Compile Include="Controllers\SingletonController.cs" />
     <Compile Include="DAL\IOrgRecordDAO.cs" />
+    <Compile Include="DAL\IPaRecordDAO.cs" />
     <Compile Include="DAL\OrgRecordImpl.cs" />
+    <Compile Include="DAL\PaRecordImpl.cs" />
     <Compile Include="DTO\OrgRecordDTO.cs" />
+    <Compile Include="DTO\PaRecordDTO.cs" />
+    <Compile Include="Entity\PaRecord.cs" />
     <Compile Include="Enums\KeyedType.cs" />
     <Compile Include="Enums\NamedType.cs" />
     <Compile Include="Global.asax.cs">
@@ -160,9 +169,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VO\OrgRecordVO.cs" />
+    <Compile Include="VO\PaRecordVO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="readme.md" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

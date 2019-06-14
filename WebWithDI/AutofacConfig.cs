@@ -32,7 +32,8 @@ namespace WebWithDI
 
             // 註冊 Type 結尾是 Controller 的所有 class
             builder.RegisterAssemblyTypes(assembly)
-                   .Where(x => x.Name.EndsWith("Controller", StringComparison.Ordinal));
+                   .Where(x => x.Name.EndsWith("Controller", StringComparison.Ordinal))
+                   .InstancePerRequest();
 
             // 註冊所有父類別為 IBaseTypeBL 的物件
             builder.RegisterAssemblyTypes(assembly)
@@ -40,6 +41,9 @@ namespace WebWithDI
 
             builder.RegisterType<OrgRecordBL>().As<IOrgRecordBL>();
             builder.RegisterType<OrgRecordImpl>().As<IOrgRecordDAO>();
+            
+            builder.RegisterType<PaRecordBL>().As<IPaRecordBL>(); 
+            builder.RegisterType<PaRecordImpl>().As<IPaRecordDAO>();
 
             builder.RegisterType<SingletonBL>().As<ISingletonBL>().SingleInstance();
 
