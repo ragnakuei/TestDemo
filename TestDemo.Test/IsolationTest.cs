@@ -13,10 +13,10 @@ namespace TestDemo.Test
         [Test]
         public void 未隔離_產生Exception()
         {
-            IDao    dao    = new DaoImpl();
-            ILogDao logDao = new LogImpl();
+            var target = new BL();
 
-            var target = new BL(dao, logDao);
+            // DaoImpl 未實作，而導致無法對 BL 進行單元測試
+            // 必須等 BL 所有相關的 class 實作完，才可以進行整合測試 
 
             Assert.Catch<NotImplementedException>(() => target.Query());
         }
@@ -29,13 +29,13 @@ namespace TestDemo.Test
                                 {
                                     new DTO
                                     {
-                                        Id   = 1,
-                                        Name = "A"
-                                    },
-                                    new DTO
+                                        Id   = 1
+                                      , Name = "A"
+                                    }
+                                  , new DTO
                                     {
-                                        Id   = 2,
-                                        Name = "B"
+                                        Id   = 2
+                                      , Name = "B"
                                     }
                                 });
 
@@ -48,13 +48,13 @@ namespace TestDemo.Test
                            {
                                new
                                {
-                                   Id   = 1,
-                                   Name = "A"
-                               },
-                               new
+                                   Id   = 1
+                                 , Name = "A"
+                               }
+                             , new
                                {
-                                   Id   = 2,
-                                   Name = "B"
+                                   Id   = 2
+                                 , Name = "B"
                                }
                            };
 
@@ -69,31 +69,31 @@ namespace TestDemo.Test
                                 {
                                     new DTO
                                     {
-                                        Id   = 1,
-                                        Name = "A"
-                                    },
-                                    new DTO
+                                        Id   = 1
+                                      , Name = "A"
+                                    }
+                                  , new DTO
                                     {
-                                        Id   = 2,
-                                        Name = "B"
+                                        Id   = 2
+                                      , Name = "B"
                                     }
                                 });
 
             ILogDao logDao = Substitute.For<ILogDao>();
 
-            var target = new BL(dao, logDao);
-            target.Query();
+            new BL(dao, logDao).Query();
 
             //logDao.ReceivedWithAnyArgs(2).Debug(string.Empty);
 
             //logDao.ReceivedWithAnyArgs(1).Debug(string.Empty);
+            
             logDao.Received(1).Debug("No Condition QueryCondition");
         }
 
         [Test]
         public void 呼叫_ILogDao_DebugObj_DebugCollection_次數1_參數為參考型別()
         {
-            var condition = new QueryCondition {Keyword = "3"};
+            var condition = new QueryCondition { Keyword = "3" };
 
             IDao dao = Substitute.For<IDao>();
             dao.QueryCondition(condition)
@@ -101,13 +101,13 @@ namespace TestDemo.Test
                         {
                             new DTO
                             {
-                                Id   = 3,
-                                Name = "C"
+                                Id   = 3
+                              , Name = "C"
                             }
                         });
 
-            ILogDao logDao           = Substitute.For<ILogDao>();
-            int[]   actualCollection = null;
+            ILogDao logDao = Substitute.For<ILogDao>();
+            int[] actualCollection = null;
             logDao.DebugCollection(Arg.Do<int[]>(x => actualCollection = x));
 
             var target = new BL(dao, logDao);
@@ -126,14 +126,14 @@ namespace TestDemo.Test
             //var expectedCondition = new QueryCondition { Keyword = "3" };
             //logDao.Received(1).DebugObject(expectedCondition);
 
-            int[] expectedCollection = new[] {3};
+            int[] expectedCollection = new[] { 3 };
             expectedCollection.ToExpectedObject().ShouldEqual(actualCollection);
         }
 
         [Test]
         public void 呼叫_參數為IEnumerable()
         {
-            IEnumerable<int> ids = new[] {5};
+            IEnumerable<int> ids = new[] { 5 };
 
             IDao dao = Substitute.For<IDao>();
             dao.QueryCondition(ids)
@@ -141,8 +141,8 @@ namespace TestDemo.Test
                         {
                             new DTO
                             {
-                                Id   = 5,
-                                Name = "E"
+                                Id   = 5
+                              , Name = "E"
                             }
                         });
 
@@ -151,11 +151,11 @@ namespace TestDemo.Test
             IEnumerable<int> actualCollection = null;
             logDao.DebugCollection(Arg.Do<int[]>(x => actualCollection = x));
 
-            var target     = new BL(dao, logDao);
-            var conditions = new List<VO> {new VO {Id = 5}};
+            var target = new BL(dao, logDao);
+            var conditions = new List<VO> { new VO { Id = 5 } };
             target.Query(conditions);
 
-            IEnumerable<int> expectedCollection = new[] {5};
+            IEnumerable<int> expectedCollection = new[] { 5 };
             expectedCollection.ToExpectedObject().ShouldNotEqual(actualCollection);
         }
     }

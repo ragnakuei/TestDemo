@@ -8,6 +8,15 @@ namespace TestDemo.Isolation
         private readonly IDao    _dao;
         private readonly ILogDao _logDao;
 
+        /// <summary>
+        /// 耦合性高的做法
+        /// </summary>
+        public BL()
+        {
+            _dao = new DaoImpl();
+            _logDao = new LogImpl();
+        }
+        
         public BL(IDao dao , ILogDao logDao)
         {
             _dao    = dao;

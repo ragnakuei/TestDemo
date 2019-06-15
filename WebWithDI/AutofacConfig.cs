@@ -35,7 +35,7 @@ namespace WebWithDI
                    .Where(x => x.Name.EndsWith("Controller", StringComparison.Ordinal))
                    .InstancePerRequest();
 
-            // 註冊所有父類別為 IBaseTypeBL 的物件
+            // 註冊 Prefix 為 BaseType 的所有類別
             builder.RegisterAssemblyTypes(assembly)
                    .Where(x => x.Name.StartsWith("BaseType", StringComparison.Ordinal));
 
@@ -45,6 +45,7 @@ namespace WebWithDI
             builder.RegisterType<PaRecordBL>().As<IPaRecordBL>(); 
             builder.RegisterType<PaRecordImpl>().As<IPaRecordDAO>();
 
+            // 每次只會 DI 相同的 instance
             builder.RegisterType<SingletonBL>().As<ISingletonBL>().SingleInstance();
 
             // NamedTypeProvider.GetNamedType() 透過 header key 來回傳 NamedType

@@ -23,7 +23,7 @@ namespace TestDemo.Test
         {
             var target = new Calculator();
 
-            var ex = Assert.Throws<DivideByZeroException>(() => target.Divided(1 , 0));
+            Assert.Throws<DivideByZeroException>(() => target.Divided(1 , 0));
         }
 
         [Test]  // Catch reference： https://github.com/nunit/docs/wiki/Assert.Catch
