@@ -107,25 +107,27 @@ namespace TestDemo.Test
             //                , new CustomClass { Id = 3 , Name = "C" , Age = 30 }
             //              };
             
-            // Test Success
-            // var expected = new []
-            //                {
-            //                    new { Id = 2 }
-            //                  , new { Id = 1 }
-            //                  , new { Id = 3 }
-            //                };
+            // // ShouldMatch 用於部份比對時，只用 anonymous class 就可以了 ! 
             
-            // Test Failed
+            // Test Success
             var expected = new []
                            {
-                               new { Id = 1 , Name = "A" , Age = 10  }
-                             , new { Id = 2 , Name = "B" , Age = 20  }
-                             , new { Id = 3 , Name = "C" , Age = 30  }
+                               new { Id = 2 }
+                             , new { Id = 1 }
+                             , new { Id = 3 }
                            };
+            
+            // Test Failed
+            // var expected = new []
+            //                {
+            //                    new { Id = 1 , Name = "A" , Age = 10  }
+            //                  , new { Id = 2 , Name = "B" , Age = 20  }
+            //                  , new { Id = 3 , Name = "C" , Age = 30  }
+            //                };
 
             expected.ToExpectedObject().ShouldMatch(actual);
             
-            // 原則上 ShouldMatch 用於部份比對時，expected 的 Property 不可以多於 actual Property
+            // ShouldMatch 用於部份比對時，expected 的 Property 不可以多於 actual Property
         }
     }
 }
