@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
-using ExpectedObjects;
+using FluentAssertions;
 
 namespace TestDemo.Test
 {
@@ -26,10 +26,10 @@ namespace TestDemo.Test
 
             // Test Failed
             // CollectionAssert 只要順序不相同，就視為不相等
-            CollectionAssert.AreEqual(actual , expected);
+            // CollectionAssert.AreEqual(actual , expected);
             
             // Test Succss 
-            // expected.ToExpectedObject().ShouldEqual(actual);
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Test]
@@ -51,10 +51,10 @@ namespace TestDemo.Test
 
             // Test Failed
             // 即使表面上看起來順序相同，仍判斷為不相等
-            CollectionAssert.AreEqual(actual , expected);
+            // CollectionAssert.AreEqual(actual , expected);
             
             // Test Success
-            // expected.ToExpectedObject().ShouldEqual(actual);
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Test]
@@ -75,10 +75,10 @@ namespace TestDemo.Test
                            };
 
             // Test Failed
-            CollectionAssert.AreEqual(actual , expected);
+            // CollectionAssert.AreEqual(actual , expected);
             
             // Test Success
-            // expected.ToExpectedObject().ShouldEqual(actual);
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Test]
@@ -125,7 +125,7 @@ namespace TestDemo.Test
             //                  , new { Id = 3 , Name = "C" , Age = 30  }
             //                };
 
-            expected.ToExpectedObject().ShouldMatch(actual);
+            actual.Should().BeEquivalentTo(expected);
             
             // ShouldMatch 用於部份比對時，expected 的 Property 不可以多於 actual Property
         }

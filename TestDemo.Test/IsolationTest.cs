@@ -1,7 +1,7 @@
 ﻿using System ;
 using System.Collections.Generic ;
 using System.Linq ;
-using ExpectedObjects ;
+using FluentAssertions;
 using NSubstitute ;
 using NUnit.Framework ;
 using TestDemo.Isolation ;
@@ -59,7 +59,7 @@ namespace TestDemo.Test
                                }
                            } ;
 
-            expected.ToExpectedObject().ShouldMatch(actual) ;
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Test]
@@ -154,7 +154,7 @@ namespace TestDemo.Test
             target.Query(conditions) ;
 
             IEnumerable<int> expectedCollection = new[] { 5 } ;
-            expectedCollection.ToExpectedObject().ShouldEqual(actualCollection) ;
+            actualCollection.Should().BeEquivalentTo(expectedCollection);
         }
 
         private bool IdsAreEqual(IEnumerable<int> ids1, IEnumerable<int> ids2)
